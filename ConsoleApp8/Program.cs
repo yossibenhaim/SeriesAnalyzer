@@ -15,86 +15,89 @@ namespace ConsoleApp8
 
         static List<string> insertingInput()
         {
-
+            Console.WriteLine("insertingInput");
         }
 
-        static void printInOrder()
+        static void printInOrder(List<string> list)
         {
+            Console.WriteLine("printInOrder");
 
         }
 
-        static void printNotInOrder()
+        static void printNotInOrder(List<string> list)
         {
-
+            Console.WriteLine("printNotInOrder");
         }
 
-        static void printSortList()
+        static void printSortList(List<string> list)
         {
-
+            Console.WriteLine("printSortList");
         }
 
-        static void printBigItem()
+        static void printBigItem(List<string> list)
         {
-
+            Console.WriteLine("printBigItem");
         }
 
-        static void printLowItem()
+        static void printLowItem(List<string> list)
         {
-
+            Console.WriteLine("printLowItem");
         }
 
 
-        static void printAverageOfList()
+        static void printAverageOfList(List<string> list)
         {
-
+            Console.WriteLine("printAverageOfList");
         }
 
 
-        static void printCountOfAlements()
+        static void printCountOfAlements(List<string> list)
         {
-
+            Console.WriteLine("printCountOfAlements");
         }
 
 
-        static void printSumOfAllAlements()
+        static void printSumOfAllAlements(List<string> list)
         {
-
+            Console.WriteLine("printSumOfAllAlements");
         }
 
-        static void menu(List<string> list)
+        static bool menu(List<string> list)
         {
             switch (Convert.ToInt32(Console.ReadLine()))
             {
                 case 1:
                     list = insertingInput();
-                    break;
+                    return true;
                 case 2:
-                    printInOrder();
-                    break;
+                    printInOrder(list);
+                    return true;
                 case 3:
-                    printNotInOrder();
-                    break;
+                    printNotInOrder(list);
+                    return true;
                 case 4:
-                    printSortList();
-                    break;
+                    printSortList(list);
+                    return true;
                 case 5:
-                    printBigItem();
-                    break;
+                    printBigItem(list);
+                    return true;
                 case 6:
-                    printLowItem();
-                    break;
+                    printLowItem(list);
+                    return true;
                 case 7:
-                    printAverageOfList();
-                    break;
+                    printAverageOfList(list);
+                    return true;
                 case 8:
-                    printCountOfAlements();
-                    break;
+                    printCountOfAlements(list);
+                    return true;
                 case 9:
-                    printSumOfAllAlements();
-                    break;
+                    printSumOfAllAlements(list);
+                    return true;
                 case 10:
-                    printSortList();
-                    break;
+                    return false;
+                default:
+                    return false;
+                
             }
         }
 
