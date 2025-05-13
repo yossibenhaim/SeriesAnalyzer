@@ -4,20 +4,33 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace ConsoleApp8
 {
     internal class Program
     {
-        public static int[] list ;
-
+        public static List<double> list = new List<double>();
 
 
         //----------------------------------------------
 
-        static void print_all_item(int[] list)
+        static List<double> chengeStringToDouble(string[] list)
         {
-            foreach (int item in list)
+            List<double> newList = new List<double>();
+
+            foreach (string item in list)
+            {
+                try { newList.Add(Convert.ToDouble(item)); } catch { }
+            }
+            return newList;
+        }
+
+        //----------------------------------------------
+
+        static void print_all_item(List<double> list)
+        {
+            foreach (double item in list)
             {
                 Console.Write(item + " ");
             }
@@ -26,12 +39,12 @@ namespace ConsoleApp8
 
         //----------------------------------------------
 
-        static int[] integrityCheck()
+        static List<double> integrityCheck()
         {
             bool stopLoop = true;
             while (stopLoop)
             {
-                if (inputValidation3Int(Program.list) < 3)
+                if (inputValidation() < 3)
                 {
                     Console.WriteLine("Incorrect insertion of a limb. Insert again!");
                     insertingInput();
@@ -46,12 +59,12 @@ namespace ConsoleApp8
 
         //----------------------------------------------
 
-        static int inputValidation3Int(int[] list)
+        static int inputValidation()
         {
             int countPositive = 0;
-
-            foreach (int item in list)
-            { if (item >= 0) {countPositive++;} }
+            
+            foreach (double item in Program.list)
+            { if (Convert.ToDouble(item) >= 0) {countPositive++;} }
             
             return countPositive;
         }
@@ -62,20 +75,14 @@ namespace ConsoleApp8
         {
             Console.WriteLine("insertingInput");
 
-            List<string> list = new List<string>(Console.ReadLine().Split(' '));
+            string[] list = Console.ReadLine().Split(' ');
 
-            int[] newList = new int[list.Count()];
-
-            for (int i = 0; i > newList.Length; i++)
-            {
-                try { newList[i] = Convert.ToInt32(list[i]); } catch { }
-            }
-            Program.list = newList;
+            Program.list = chengeStringToDouble(list);
         }
 
         //----------------------------------------------
 
-        static void printInOrder(int[] list)
+        static void printInOrder(List<double> list)
         {
             Console.Write("the list is: ");
             print_all_item(list);
@@ -83,11 +90,12 @@ namespace ConsoleApp8
 
         //----------------------------------------------
 
-        static void printReversInOrder(int[] list)
+        static void printReversInOrder(List<double> list)
         {
+            List<double> reversList = new List<double>();
             Console.Write("The reverse list is: ");
 
-            for (int i = list.Length-1; i >= 0; i--)
+            for (int i = list.Count-1; i >= 0; i--)
             { Console.Write (list[i] + " "); }
             Console.WriteLine("");
 
@@ -95,60 +103,60 @@ namespace ConsoleApp8
 
         //----------------------------------------------
 
-        static void printSortList(int[] list)
+        static void printSortList(List<double> list)
         {
-            int[] sortlist = list;
-            Array.Sort(sortlist);
-            Console.Write("The sorted series: "); print_all_item(sortlist);
+            List<double> sortlist = list;
+            sortlist.Sort();
+            Console.Write("The sorted series: "); print_all_item(list);
         }
 
         //----------------------------------------------
 
-        static void printBigItem(int[] list)
+        static void printBigItem(List<double> list)
         {
-            int big = list[0];
+            double big = list[0];
 
-            foreach (int item in list) { if (item > big) { big = item; } }
+            foreach (double item in list) { if (item > big) { big = item; } }
 
             Console.WriteLine($"The itam of big is: {big}");
         }
 
         //----------------------------------------------
 
-        static void printLowItem(int[] list)
+        static void printLowItem(List<double> list)
         {
-            int low = list[0];
+            double low = list[0];
 
-            foreach (int item in list) { if (item < low) { low = item; } }
+            foreach (double item in list) { if (item < low) { low = item; } }
 
             Console.WriteLine($"The itam of big is: {low}");
         }
 
         //----------------------------------------------
 
-        static void printAverageOfList(int[] list)
+        static void printAverageOfList(List<double> list)
         {
-            int sum = 0;
+            double sum = 0;
 
-            foreach (int item in list) { sum += item; }
+            foreach (double item in list) { sum += item; }
 
             Console.WriteLine($"The average of list is: {sum / list.Count()}");
         }
 
         //----------------------------------------------
 
-        static void printCountOfAlements(int[] list)
+        static void printCountOfAlements(List<double> list)
         {
             Console.WriteLine($"The count of list is: {list.Count()}");
         }
 
         //----------------------------------------------
 
-        static void printSumOfAllAlements(int[] list)
+        static void printSumOfAllAlements(List<double> list)
         {
-            int total = 0;
+            double total = 0;
            
-            foreach(int item in list) { total += item; }
+            foreach(double item in list) { total += item; }
 
             Console.WriteLine($"The totel the sum is: {total}");
         }
@@ -161,7 +169,8 @@ namespace ConsoleApp8
 
             while (true)
             {
-                Console.WriteLine("To replace the input, press 1.\r\n" +
+                Console.WriteLine("\n\n---------------Series Analyzer---------------" +
+                    "\n\nTo replace the input, press 1.\r\n" +
                 "To print the input in the order it was printed, press 2.\r\n" +
                 "To print the input in reverse order, press 3.\r\n" +
                 "To print the input in sorted order, press 4.\r\n" +
@@ -228,6 +237,7 @@ namespace ConsoleApp8
 
         static void Main(string[] args)
         {
+            Program.list = chengeStringToDouble(args);
             bool stopingLoop = true;
 
             while (stopingLoop) { stopingLoop = menu(); }
