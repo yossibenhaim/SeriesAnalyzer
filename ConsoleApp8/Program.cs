@@ -9,15 +9,15 @@ namespace ConsoleApp8
 {
     internal class Program
     {
-        public static List<double> list = new List<double>();
+        public static int[] list ;
 
 
 
         //----------------------------------------------
 
-        static void print_all_item(List<double> list)
+        static void print_all_item(int[] list)
         {
-            foreach (double item in list)
+            foreach (int item in list)
             {
                 Console.Write(item + " ");
             }
@@ -26,12 +26,12 @@ namespace ConsoleApp8
 
         //----------------------------------------------
 
-        static List<double> integrityCheck()
+        static int[] integrityCheck()
         {
             bool stopLoop = true;
             while (stopLoop)
             {
-                if (inputValidation3Int() < 3)
+                if (inputValidation3Int(Program.list) < 3)
                 {
                     Console.WriteLine("Incorrect insertion of a limb. Insert again!");
                     insertingInput();
@@ -46,12 +46,12 @@ namespace ConsoleApp8
 
         //----------------------------------------------
 
-        static int inputValidation3Int()
+        static int inputValidation3Int(int[] list)
         {
             int countPositive = 0;
-            
-            foreach (double item in Program.list)
-            { if (Convert.ToDouble(item) >= 0) {countPositive++;} }
+
+            foreach (int item in list)
+            { if (item >= 0) {countPositive++;} }
             
             return countPositive;
         }
@@ -64,18 +64,18 @@ namespace ConsoleApp8
 
             List<string> list = new List<string>(Console.ReadLine().Split(' '));
 
-            List<double> newList = new List<double>();
+            int[] newList = new int[list.Count()];
 
-            foreach (string item in list)
+            for (int i = 0; i > newList.Length; i++)
             {
-                try { newList.Add(Convert.ToDouble(item)); } catch { }
+                try { newList[i] = Convert.ToInt32(list[i]); } catch { }
             }
             Program.list = newList;
         }
 
         //----------------------------------------------
 
-        static void printInOrder(List<double> list)
+        static void printInOrder(int[] list)
         {
             Console.Write("the list is: ");
             print_all_item(list);
@@ -83,12 +83,11 @@ namespace ConsoleApp8
 
         //----------------------------------------------
 
-        static void printReversInOrder(List<double> list)
+        static void printReversInOrder(int[] list)
         {
-            List<double> reversList = new List<double>();
             Console.Write("The reverse list is: ");
 
-            for (int i = list.Count-1; i >= 0; i--)
+            for (int i = list.Length-1; i >= 0; i--)
             { Console.Write (list[i] + " "); }
             Console.WriteLine("");
 
@@ -96,60 +95,60 @@ namespace ConsoleApp8
 
         //----------------------------------------------
 
-        static void printSortList(List<double> list)
+        static void printSortList(int[] list)
         {
-            List<double> sortlist = list;
-            sortlist.Sort();
-            Console.Write("The sorted series: "); print_all_item(list);
+            int[] sortlist = list;
+            Array.Sort(sortlist);
+            Console.Write("The sorted series: "); print_all_item(sortlist);
         }
 
         //----------------------------------------------
 
-        static void printBigItem(List<double> list)
+        static void printBigItem(int[] list)
         {
-            double big = list[0];
+            int big = list[0];
 
-            foreach (double item in list) { if (item > big) { big = item; } }
+            foreach (int item in list) { if (item > big) { big = item; } }
 
             Console.WriteLine($"The itam of big is: {big}");
         }
 
         //----------------------------------------------
 
-        static void printLowItem(List<double> list)
+        static void printLowItem(int[] list)
         {
-            double low = list[0];
+            int low = list[0];
 
-            foreach (double item in list) { if (item < low) { low = item; } }
+            foreach (int item in list) { if (item < low) { low = item; } }
 
             Console.WriteLine($"The itam of big is: {low}");
         }
 
         //----------------------------------------------
 
-        static void printAverageOfList(List<double> list)
+        static void printAverageOfList(int[] list)
         {
-            double sum = 0;
+            int sum = 0;
 
-            foreach (double item in list) { sum += item; }
+            foreach (int item in list) { sum += item; }
 
             Console.WriteLine($"The average of list is: {sum / list.Count()}");
         }
 
         //----------------------------------------------
 
-        static void printCountOfAlements(List<double> list)
+        static void printCountOfAlements(int[] list)
         {
             Console.WriteLine($"The count of list is: {list.Count()}");
         }
 
         //----------------------------------------------
 
-        static void printSumOfAllAlements(List<double> list)
+        static void printSumOfAllAlements(int[] list)
         {
-            double total = 0;
+            int total = 0;
            
-            foreach(double item in list) { total += item; }
+            foreach(int item in list) { total += item; }
 
             Console.WriteLine($"The totel the sum is: {total}");
         }
