@@ -15,7 +15,7 @@ namespace ConsoleApp8
             bool stopLoop = true;
             while (stopLoop)
             {
-                if (!inputValidation3Int(list))
+                if (inputValidation3Int(list) < 3)
                 {
                     list = insertingInput();
                 }
@@ -27,21 +27,17 @@ namespace ConsoleApp8
             return list;
         }
 
-        static bool inputValidation3Int(List<double> list)
+        static int inputValidation3Int(List<double> list)
         {
             int countInt = 0;
             foreach (double item in list)
             {
-                if (Convert.ToDouble(item) % 1 == 0)
+                if (Convert.ToDouble(item) >= 0)
                 {
                     countInt++;
                 }
             }
-            if (countInt >= 3)
-            {
-                return true;
-            }
-            return false;
+            return countInt;
         }
 
         static List<double> insertingInput()
@@ -54,7 +50,15 @@ namespace ConsoleApp8
 
             foreach (string item in list)
             {
-                newList.Add(Convert.ToDouble(item));
+                try
+                {
+                    newList.Add(Convert.ToDouble(item));
+                }
+                catch
+                {
+
+                }
+
             }
             return newList;
         }
@@ -172,7 +176,9 @@ namespace ConsoleApp8
 
             list = integrityCheck(list);
 
-            Console.WriteLine("To replace the input, press 1.\r\n" +
+            while (true)
+            {
+                Console.WriteLine("To replace the input, press 1.\r\n" +
                 "To print the input in the order it was printed, press 2.\r\n" +
                 "To print the input in reverse order, press 3.\r\n" +
                 "To print the input in sorted order, press 4.\r\n" +
@@ -183,42 +189,63 @@ namespace ConsoleApp8
                 "To print the sum of the elements in the input, press 9.\r\n" +
                 "To exit, press 10.");
 
-            switch (Convert.ToInt32(Console.ReadLine()))
-            {
-                case 1:
-                    list = insertingInput();
-                    list = integrityCheck(list);
 
-                    return true;
-                case 2:
-                    printInOrder(list);
-                    return true;
-                case 3:
-                    printNotInOrder(list);
-                    return true;
-                case 4:
-                    printSortList(list);
-                    return true;
-                case 5:
-                    printBigItem(list);
-                    return true;
-                case 6:
-                    printLowItem(list);
-                    return true;
-                case 7:
-                    printAverageOfList(list);
-                    return true;
-                case 8:
-                    printCountOfAlements(list);
-                    return true;
-                case 9:
-                    printSumOfAllAlements(list);
-                    return true;
-                case 10:
-                    return false;
-                default:
-                    return false;
+            
 
+
+                string chiech = Console.ReadLine();
+                try
+                {
+
+
+                    switch (Convert.ToInt32(chiech))
+
+
+                    {
+                        case 1:
+                            list = insertingInput();
+                            list = integrityCheck(list);
+
+                            return true;
+                        case 2:
+                            printInOrder(list);
+                            return true;
+                        case 3:
+                            printNotInOrder(list);
+                            return true;
+                        case 4:
+                            printSortList(list);
+                            return true;
+                        case 5:
+                            printBigItem(list);
+                            return true;
+                        case 6:
+                            printLowItem(list);
+                            return true;
+                        case 7:
+                            printAverageOfList(list);
+                            return true;
+                        case 8:
+                            printCountOfAlements(list);
+                            return true;
+                        case 9:
+                            printSumOfAllAlements(list);
+                            return true;
+                        case 10:
+                            return false;
+                        default:
+                            return false;
+
+                    }
+
+
+                }
+                catch
+                {
+                    Console.WriteLine("You have sent invalid input.\n" +
+                        "Please try again.\n" +
+                        "Be sure to choose between 1 - 10.\n");
+                }
             }
         }
 
