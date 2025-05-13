@@ -105,7 +105,9 @@ namespace ConsoleApp8
 
         static void printSortList(List<double> list)
         {
+
             List<double> sortlist = new List<double>(list);
+
             sortlist.Sort();
             Console.Write("The sorted series: "); PrintAllItems(list);
         }
