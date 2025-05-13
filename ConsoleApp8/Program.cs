@@ -11,23 +11,32 @@ namespace ConsoleApp8
     {
         public static List<double> list = new List<double>();
 
+        //----------------------------------------------
+
         static void printDouble(double item)
         {
             Console.WriteLine(item);
         }
+
+        //----------------------------------------------
 
         static void printString(string str)
         {
             Console.WriteLine(str);
         }
 
+        //----------------------------------------------
+
         static void print_all_item(List<double> list)
         {
             foreach (double item in list)
             {
-                printDouble(item);
+                Console.Write(item + " ");
             }
+            printString("");
         }
+
+        //----------------------------------------------
 
         static List<double> integrityCheck()
         {
@@ -47,35 +56,36 @@ namespace ConsoleApp8
             return Program.list;
         }
 
+        //----------------------------------------------
+
         static int inputValidation3Int()
         {
             int countPositive = 0;
             foreach (double item in Program.list)
             {
-                if (Convert.ToDouble(item) >= 0)
-                {
-                    countPositive++;
-                }
+                if (Convert.ToDouble(item) >= 0){countPositive++;}
             }
             return countPositive;
         }
 
+        //----------------------------------------------
+
         static void insertingInput()
         {
             printString("insertingInput");
+
             List<string> list = new List<string>(Console.ReadLine().Split(' '));
+
             List<double> newList = new List<double>();
 
             foreach (string item in list)
             {
-                try
-                {
-                    newList.Add(Convert.ToDouble(item));
-                }
-                catch { }
+                try { newList.Add(Convert.ToDouble(item)); } catch { }
             }
             Program.list = newList;
         }
+
+        //----------------------------------------------
 
         static void printInOrder(List<double> list)
         {
@@ -84,104 +94,94 @@ namespace ConsoleApp8
 
         }
 
-        static void printNotInOrder(List<double> list)
+        //----------------------------------------------
+
+        static void printReversInOrder(List<double> list)
         {
             List<double> reversList = new List<double>();
-            
-            foreach (double item in list)
-            {
-                reversList.Add(item);
-            }
+            Console.Write("The reverse list is: ");
 
-            foreach (double item in reversList)
-            {
-                printDouble(item);
-            }
-            
-            Console.WriteLine("printNotInOrder");
+            for (int i = list.Count-1; i >= 0; i--)
+            { Console.Write (list[i] + " "); }
+            printString("");
+
+            printString("printNotInOrder");
         }
+
+        //----------------------------------------------
 
         static void printSortList(List<double> list)
         {
-            list.Sort();
+            List<double> sortlist = new List<double> ();
+
+            sortlist = list; sortlist.Sort();
+            Console.Write("The sorted series: ");
             print_all_item(list);
             printString("printSortList");
         }
+
+        //----------------------------------------------
 
         static void printBigItem(List<double> list)
         {
             double big = list[0];
             foreach (double item in list)
-            {
-                if (item > big)
-                {
-                    big = item;
-                }
-            }
-            printString($"The itam of big is {big}");
+
+            { if (item > big) { big = item; } }
+
+            printString($"The itam of big is: {big}");
             printString("printBigItem");
         }
+
+        //----------------------------------------------
 
         static void printLowItem(List<double> list)
         {
             double low = list[0];
             foreach (double item in list)
-            {
-                if (item < low)
-                {
-                    low = item;
-                }
-            }
-            printString($"The itam of big is {low}");
+
+            { if (item < low) { low = item; } }
+
+            printString($"The itam of big is: {low}");
             printString("printLowItem");
         }
 
+        //----------------------------------------------
 
         static void printAverageOfList(List<double> list)
         {
             double sum = 0;
-            int count = 0;
-            foreach (double item in list)
-            {
-                sum += item;
-                count++;
-            }
-            printString($"The average of list is {sum / count}");
+
+            foreach (double item in list) { sum += item; }
+
+            printString($"The average of list is: {sum / list.Count()}");
             printString("printAverageOfList");
         }
 
+        //----------------------------------------------
 
         static void printCountOfAlements(List<double> list)
         {
-            int count = 0;
-            foreach (double _ in list)
-            {
-                count++;
-            }
-            printString($"The count of list is {count}");
+            printString($"The count of list is: {list.Count()}");
             printString("printCountOfAlements");
         }
 
+        //----------------------------------------------
 
         static void printSumOfAllAlements(List<double> list)
         {
             double total = 0;
-            foreach(double item in list)
-            {
-                total += item;
-            }
-            printString($"The totel the sum is {total}");
+           
+            foreach(double item in list) { total += item; }
+
+            printString($"The totel the sum is: {total}");
             printString("printSumOfAllAlements");
         }
 
-
-
-
-
+        //----------------------------------------------
 
         static bool menu()
         {
-
             Program.list = integrityCheck();
 
             while (true)
@@ -198,28 +198,21 @@ namespace ConsoleApp8
                 "To exit, press 10.");
 
 
-            
-
-
                 string chiech = Console.ReadLine();
                 try
                 {
-
-
                     switch (Convert.ToInt32(chiech))
-
 
                     {
                         case 1:
                             insertingInput();
                             integrityCheck();
-
                             return true;
                         case 2:
                             printInOrder(list);
                             return true;
                         case 3:
-                            printNotInOrder(list);
+                            printReversInOrder(list);
                             return true;
                         case 4:
                             printSortList(list);
@@ -245,8 +238,6 @@ namespace ConsoleApp8
                             return false;
 
                     }
-
-
                 }
                 catch
                 {
@@ -258,19 +249,13 @@ namespace ConsoleApp8
         }
 
 
-
+        //----------------------------------------------
 
         static void Main(string[] args)
         {
             bool stopingLoop = true;
 
-
-            while (stopingLoop)
-            {
-                stopingLoop = menu();
-            }
-
-
+            while (stopingLoop) { stopingLoop = menu(); }
 
         }
     }
