@@ -9,15 +9,16 @@ namespace ConsoleApp8
 {
     internal class Program
     {
+        public static List<double> list = new List<double>();
 
-        static List<double> integrityCheck(List<double> list)
+        static List<double> integrityCheck()
         {
             bool stopLoop = true;
             while (stopLoop)
             {
-                if (inputValidation3Int(list) < 3)
+                if (inputValidation3Int() < 3)
                 {
-                    list = insertingInput();
+                    insertingInput();
                 }
                 else
                 {
@@ -27,10 +28,10 @@ namespace ConsoleApp8
             return list;
         }
 
-        static int inputValidation3Int(List<double> list)
+        static int inputValidation3Int()
         {
             int countInt = 0;
-            foreach (double item in list)
+            foreach (double item in Program.list)
             {
                 if (Convert.ToDouble(item) >= 0)
                 {
@@ -40,10 +41,10 @@ namespace ConsoleApp8
             return countInt;
         }
 
-        static List<double> insertingInput()
+        static void insertingInput()
         {
             Console.WriteLine("insertingInput");
-            List<string> list = new List<string> (Console.ReadLine().Split(' '));
+            List<string> list = new List<string>(Console.ReadLine().Split(' '));
 
             List<double> newList = new List<double>();
 
@@ -60,7 +61,7 @@ namespace ConsoleApp8
                 }
 
             }
-            return newList;
+            Program.list = newList;
         }
 
         static void printInOrder(List<double> list)
@@ -171,10 +172,10 @@ namespace ConsoleApp8
 
 
 
-        static bool menu(List<double> list)
+        static bool menu()
         {
 
-            list = integrityCheck(list);
+            Program.list = integrityCheck();
 
             while (true)
             {
@@ -203,8 +204,8 @@ namespace ConsoleApp8
 
                     {
                         case 1:
-                            list = insertingInput();
-                            list = integrityCheck(list);
+                            insertingInput();
+                            integrityCheck();
 
                             return true;
                         case 2:
@@ -255,11 +256,11 @@ namespace ConsoleApp8
         static void Main(string[] args)
         {
             bool stopingLoop = true;
-            List<double> list = new List<double>();
+
 
             while (stopingLoop)
             {
-                stopingLoop = menu(list);
+                stopingLoop = menu();
             }
 
 
