@@ -92,7 +92,7 @@ namespace ConsoleApp8
 
         static void printReversInOrder(List<double> list)
         {
-            List<double> reversList = new List<double>();
+            
             Console.Write("The reverse list is: ");
 
             for (int i = list.Count-1; i >= 0; i--)
