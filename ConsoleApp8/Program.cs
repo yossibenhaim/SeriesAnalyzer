@@ -15,7 +15,7 @@ namespace ConsoleApp8
 
         //----------------------------------------------
 
-        static List<double> chengeStringToDouble(string[] list)
+        static List<double> ChangeStringToDouble(string[] list)
         {
             List<double> newList = new List<double>();
 
@@ -28,7 +28,7 @@ namespace ConsoleApp8
 
         //----------------------------------------------
 
-        static void print_all_item(List<double> list)
+        static void PrintAllItems(List<double> list)
         {
             foreach (double item in list)
             {
@@ -77,7 +77,7 @@ namespace ConsoleApp8
 
             string[] list = Console.ReadLine().Split(' ');
 
-            Program.list = chengeStringToDouble(list);
+            Program.list = ChangeStringToDouble(list);
         }
 
         //----------------------------------------------
@@ -85,14 +85,14 @@ namespace ConsoleApp8
         static void printInOrder(List<double> list)
         {
             Console.Write("the list is: ");
-            print_all_item(list);
+            PrintAllItems(list);
         }
 
         //----------------------------------------------
 
         static void printReversInOrder(List<double> list)
         {
-            List<double> reversList = new List<double>();
+            
             Console.Write("The reverse list is: ");
 
             for (int i = list.Count-1; i >= 0; i--)
@@ -105,9 +105,11 @@ namespace ConsoleApp8
 
         static void printSortList(List<double> list)
         {
-            List<double> sortlist = new List<double>(list); ;
+
+            List<double> sortlist = new List<double>(list);
+
             sortlist.Sort();
-            Console.Write("The sorted series: "); print_all_item(list);
+            Console.Write("The sorted series: "); PrintAllItems(list);
         }
 
         //----------------------------------------------
@@ -123,7 +125,7 @@ namespace ConsoleApp8
 
         //----------------------------------------------
 
-        static void printLowItem(List<double> list)
+        static void PrintLowestItem(List<double> list)
         {
             double low = list[0];
 
@@ -205,7 +207,7 @@ namespace ConsoleApp8
                             printBigItem(list);
                             return true;
                         case 6:
-                            printLowItem(list);
+                            PrintLowestItem(list);
                             return true;
                         case 7:
                             printAverageOfList(list);
@@ -237,7 +239,7 @@ namespace ConsoleApp8
 
         static void Main(string[] args)
         {
-            Program.list = chengeStringToDouble(args);
+            Program.list = ChangeStringToDouble(args);
             bool stopingLoop = true;
 
             while (stopingLoop) { stopingLoop = menu(); }
