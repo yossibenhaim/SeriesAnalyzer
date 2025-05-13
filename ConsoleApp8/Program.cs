@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace ConsoleApp8
 {
@@ -12,6 +13,18 @@ namespace ConsoleApp8
         public static List<double> list = new List<double>();
 
 
+        //----------------------------------------------
+
+        static List<double> chengeStringToDouble(string[] list)
+        {
+            List<double> newList = new List<double>();
+
+            foreach (string item in list)
+            {
+                try { newList.Add(Convert.ToDouble(item)); } catch { }
+            }
+            return newList;
+        }
 
         //----------------------------------------------
 
@@ -31,7 +44,7 @@ namespace ConsoleApp8
             bool stopLoop = true;
             while (stopLoop)
             {
-                if (inputValidation3Int() < 3)
+                if (inputValidation() < 3)
                 {
                     Console.WriteLine("Incorrect insertion of a limb. Insert again!");
                     insertingInput();
@@ -46,7 +59,7 @@ namespace ConsoleApp8
 
         //----------------------------------------------
 
-        static int inputValidation3Int()
+        static int inputValidation()
         {
             int countPositive = 0;
             
@@ -62,15 +75,9 @@ namespace ConsoleApp8
         {
             Console.WriteLine("insertingInput");
 
-            List<string> list = new List<string>(Console.ReadLine().Split(' '));
+            string[] list = Console.ReadLine().Split(' ');
 
-            List<double> newList = new List<double>();
-
-            foreach (string item in list)
-            {
-                try { newList.Add(Convert.ToDouble(item)); } catch { }
-            }
-            Program.list = newList;
+            Program.list = chengeStringToDouble(list);
         }
 
         //----------------------------------------------
@@ -162,7 +169,8 @@ namespace ConsoleApp8
 
             while (true)
             {
-                Console.WriteLine("To replace the input, press 1.\r\n" +
+                Console.WriteLine("\n\n---------------Series Analyzer---------------" +
+                    "\n\nTo replace the input, press 1.\r\n" +
                 "To print the input in the order it was printed, press 2.\r\n" +
                 "To print the input in reverse order, press 3.\r\n" +
                 "To print the input in sorted order, press 4.\r\n" +
@@ -229,6 +237,7 @@ namespace ConsoleApp8
 
         static void Main(string[] args)
         {
+            Program.list = chengeStringToDouble(args);
             bool stopingLoop = true;
 
             while (stopingLoop) { stopingLoop = menu(); }
