@@ -11,6 +11,24 @@ namespace ConsoleApp8
     {
         public static List<double> list = new List<double>();
 
+        static void printDouble(double item)
+        {
+            Console.WriteLine(item);
+        }
+
+        static void printString(string str)
+        {
+            Console.WriteLine(str);
+        }
+
+        static void print_all_item(List<double> list)
+        {
+            foreach (double item in list)
+            {
+                printDouble(item);
+            }
+        }
+
         static List<double> integrityCheck()
         {
             bool stopLoop = true;
@@ -18,6 +36,7 @@ namespace ConsoleApp8
             {
                 if (inputValidation3Int() < 3)
                 {
+                    printString("Incorrect insertion of a limb. Insert again!");
                     insertingInput();
                 }
                 else
@@ -25,29 +44,27 @@ namespace ConsoleApp8
                     stopLoop = false;
                 }
             }
-            return list;
+            return Program.list;
         }
 
         static int inputValidation3Int()
         {
-            int countInt = 0;
+            int countPositive = 0;
             foreach (double item in Program.list)
             {
                 if (Convert.ToDouble(item) >= 0)
                 {
-                    countInt++;
+                    countPositive++;
                 }
             }
-            return countInt;
+            return countPositive;
         }
 
         static void insertingInput()
         {
-            Console.WriteLine("insertingInput");
+            printString("insertingInput");
             List<string> list = new List<string>(Console.ReadLine().Split(' '));
-
             List<double> newList = new List<double>();
-
 
             foreach (string item in list)
             {
@@ -55,22 +72,15 @@ namespace ConsoleApp8
                 {
                     newList.Add(Convert.ToDouble(item));
                 }
-                catch
-                {
-
-                }
-
+                catch { }
             }
             Program.list = newList;
         }
 
         static void printInOrder(List<double> list)
         {
-            foreach (double item in list)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("printInOrder");
+            print_all_item(list);
+            printString("printInOrder");
 
         }
 
@@ -85,7 +95,7 @@ namespace ConsoleApp8
 
             foreach (double item in reversList)
             {
-                Console.WriteLine(item);
+                printDouble(item);
             }
             
             Console.WriteLine("printNotInOrder");
@@ -94,11 +104,8 @@ namespace ConsoleApp8
         static void printSortList(List<double> list)
         {
             list.Sort();
-            foreach(double item in list)
-            {
-                Console.WriteLine(item);
-            }
-            Console.WriteLine("printSortList");
+            print_all_item(list);
+            printString("printSortList");
         }
 
         static void printBigItem(List<double> list)
@@ -111,8 +118,8 @@ namespace ConsoleApp8
                     big = item;
                 }
             }
-            Console.WriteLine($"The itam of big is {big}");
-            Console.WriteLine("printBigItem");
+            printString($"The itam of big is {big}");
+            printString("printBigItem");
         }
 
         static void printLowItem(List<double> list)
@@ -125,8 +132,8 @@ namespace ConsoleApp8
                     low = item;
                 }
             }
-            Console.WriteLine($"The itam of big is {low}");
-            Console.WriteLine("printLowItem");
+            printString($"The itam of big is {low}");
+            printString("printLowItem");
         }
 
 
@@ -139,8 +146,8 @@ namespace ConsoleApp8
                 sum += item;
                 count++;
             }
-            Console.WriteLine($"The average of list is {sum / count}");
-            Console.WriteLine("printAverageOfList");
+            printString($"The average of list is {sum / count}");
+            printString("printAverageOfList");
         }
 
 
@@ -151,8 +158,8 @@ namespace ConsoleApp8
             {
                 count++;
             }
-            Console.WriteLine($"The count of list is {count}");
-            Console.WriteLine("printCountOfAlements");
+            printString($"The count of list is {count}");
+            printString("printCountOfAlements");
         }
 
 
@@ -163,8 +170,8 @@ namespace ConsoleApp8
             {
                 total += item;
             }
-            Console.WriteLine($"The totel the sum is {total}");
-            Console.WriteLine("printSumOfAllAlements");
+            printString($"The totel the sum is {total}");
+            printString("printSumOfAllAlements");
         }
 
 
@@ -179,7 +186,7 @@ namespace ConsoleApp8
 
             while (true)
             {
-                Console.WriteLine("To replace the input, press 1.\r\n" +
+                printString("To replace the input, press 1.\r\n" +
                 "To print the input in the order it was printed, press 2.\r\n" +
                 "To print the input in reverse order, press 3.\r\n" +
                 "To print the input in sorted order, press 4.\r\n" +
@@ -243,7 +250,7 @@ namespace ConsoleApp8
                 }
                 catch
                 {
-                    Console.WriteLine("You have sent invalid input.\n" +
+                    printString("You have sent invalid input.\n" +
                         "Please try again.\n" +
                         "Be sure to choose between 1 - 10.\n");
                 }
